@@ -76,7 +76,17 @@ class Student(object):
         # - 만약, 등록금이 오를 상태로 데이터를 만들어주고 싶다면, 아래와 같이 클래스변수를 활용한다.
         return cls(id, first_name, last_name, email, grade, tuition_per * cls.tuition_per, gpa)
 
-        
+    # 14) 스태틱 메서드
+    # - self, cls가 안들어간다. 원하는 인자 1개만 받는다.
+    # - @staticmethod가 데코로 들어간다.
+    @staticmethod
+    def is_scholarship_st(inst):
+        if inst._gpa >= 4.3:
+            return '{} is a scholarship recipient'.format(inst._last_name)
+        return 'Sorry. Not a scholarship recipient.'
+
+
+
 
 
 
@@ -186,8 +196,32 @@ print(is_scholarship(student_4))
 
 # 13-2) 사고 확장해보기
 # - is_scholarship()은 전체 데이터(객체)를 대상으로 적용되는 함수다.
-# - 외부(클래스 밖)에 있어도 상관없지만, 
-# - Student클래스의 객체에만 적용 +  찾아서 유지보수 편리 
-# - 를 위해 class내부에 선언해주는게 맞다.
-# - class관계 + class정보를 사용하는 함수 
-# - 객체를 사용하므로 인스턴스메서드로 작성해도 되지만, **self를 받을 필요없고, cls도 받을 필요 없는** 함수여
+# - 함수가 지금처럼 외부(클래스 밖)에 있어도 상관없지만, 
+# - Student클래스의 객체에만 적용 +  찾아서 유지보수 편리를 위해 class내부에 선언해주는게 맞다.
+# - class관계됨 + class정보를 사용하는 함수 
+# - 객체를 사용하므로 인스턴스메서드로 작성해도 되지만, 
+# - **self를 받을 필요없고, cls도 받을 필요 없는**, 공통으로서 누구나 사용할 수 있는 메소드
+# - 밖에 있어도 상관없으면서.. 각 객체마다(x) 모든 객체에 대해, 클래스변수 필수?(x), class와 묶여서 움직여야하는 함수를 여기다 작성하자.
+# - python을 통한 self, cls같은 인자 넘김 없이, 전체 객체에 대한 공통적인 일을 작성하자.
+# - ex> 제적사항, 자퇴조회 등 각 개인정보 처리가 아닌.. 모든 객체에 대한 일을 할 때...
+# - but, 인스턴스메서드로도.. 가능함.. inst자체가 self라서...
+# - 단위테스트, 테스트코드를 작성할 때, 관련된 것을 모아두면 더 좋아서 사용해도 된다.
+print()
+# 15) 신통한 스태틱 메서드 사용 
+# - 신통한 클래스변수처럼, 클래스.클래스변수 or 인스턴스.클래스변수(찾아가기)가 가능하다.
+# - 요즘은, 전문가를 위한 파이썬에서 스태틱메소드가 효용성이 없다고 함.
+# 15-1) 클래스.스태틱메서드() 로 사용
+print( Student.is_scholarship_st(student_1))
+print( Student.is_scholarship_st(student_2))
+print( Student.is_scholarship_st(student_3))
+print( Student.is_scholarship_st(student_4))
+print()
+# 15-2) 인스턴스.스태틱메서드() 로 사용
+# - 객체가 2번이나 호출되는 이상함?도 있는 것 같음.
+print( student_1.is_scholarship_st(student_2))
+print( student_2.is_scholarship_st(student_4))
+print( student_3.is_scholarship_st(student_3))
+print( student_4.is_scholarship_st(student_1))
+
+
+# 클래스를 잘 짜놓으면, 모듈(.py)로 빼놓을 수 있다.
