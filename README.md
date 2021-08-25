@@ -1,7 +1,9 @@
-## 파이썬 심화 학습
- - py파일에 주석으로 차근차근 작성되었습니다.
+## 개요
+ - python의 심화된 내용을 py파일에 주석으로 차근차근 작성되었습니다.
  - 주석을 따라가면서 클론코딩 해보세요.
 
+## 목차
+ - 01~03 : 클래스/인스턴수 변수와 메서드
 
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
@@ -89,6 +91,7 @@ C:\python_advanced> .\Scripts\activate
 (python_advanced) PS C:\python_advanced> code .
 ```
 
+
 ### 가상환경 package 다루기
 
 1. 설치된 것 들 확인 : `pip list`
@@ -97,9 +100,5 @@ C:\python_advanced> .\Scripts\activate
     -  업그레이드 : pip `install --upgrade` pkg
 4. 설치된 것을 확인 : pip `show` pkg 
 5. 삭제 : pip `uninstall` pkg
-
-
-## 목차
- - 01~03 : 클래스/인스턴수 변수와 메서드
 
 
