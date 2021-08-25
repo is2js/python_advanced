@@ -91,6 +91,23 @@ C:\python_advanced> .\Scripts\activate
 (python_advanced) PS C:\python_advanced> code .
 ```
 
+### 참고) interpreter관련 에러가 난다면
+ - https://github.com/microsoft/vscode-python/issues/11924
+```
+For anyone running into this issue, you can add this to your settings to workaround the problem:
+"python.experiments.optOutFrom": ["pythonDiscoveryModule", "pythonDiscoveryModuleWithoutWatcher"],
+
+Also, for folks running into this problem, before you optout, can you do the following so we can narrow down the issue. Using the CPU profiles here we addressed few of the problems. But it is not enough for some of the cases.
+
+Remove any "python.experiments.optOutFrom" setting.
+Set this in your user settings: "python.logging.level": "info".
+Reload VS code and open a python file.
+Extension causes high CPU problem or Loading takes too long or loading fails.
+Copy the "Output" > "Python" log contents and share (redact any username or data that you don't want to share).
+Remove the "python.logging.level": "info"
+Use this optOut "python.experiments.optOutFrom": ["pythonDiscoveryModule", "pythonDiscoveryModuleWithoutWatcher"],
+```
+
 
 ### 가상환경 package 다루기
 
