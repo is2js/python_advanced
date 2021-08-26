@@ -4,6 +4,8 @@
 
 ## 목차
  - 01~03 : 클래스/인스턴수 변수와 메서드
+ - 04 : 데이터모델-namedtuple
+ - 05 : 데이터모델-special method(magic method)
 
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
