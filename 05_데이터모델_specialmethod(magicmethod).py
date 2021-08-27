@@ -1,4 +1,4 @@
-# 04 데이터 모델 - special method = magic method
+# 05 데이터 모델 - special method = magic method
 # 미리 python이 만들어놓은 연산자들을 overloading한 뒤 사용할 수 있는 집합들
 # - cf) 파이썬 중요 프레임워크 : 시퀀스, 반복, 함수, 클래스
 # - my) int데이터타입의 변수도 일종의 객체다
