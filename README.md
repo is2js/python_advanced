@@ -1,12 +1,17 @@
 ## 개요
  - python의 심화된 내용을 py파일에 주석으로 차근차근 작성되었습니다.
  - 주석을 따라가면서 클론코딩 해보세요.
+    - 개인적으로 의문이 가거나 과거의 것은 `QQQ`, 
+    - 개인적으로 새롭게 알게되거나 아차~! 싶은 내용들은 `AAA`로 표기되었s습니다.
 
 ## 목차
  - 01~03 : 클래스/인스턴수 변수와 메서드
  - 04 : 데이터모델-namedtuple
- - 05 : 데이터모델-special method(magic method)
-
+ - 05 : 데이터모델-magic method in class
+ - 06 : advanced list-시퀀스/list comprehension/generator(like tuple comp) 
+ - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/
+ 
+s
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
 
