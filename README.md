@@ -9,9 +9,14 @@
  - 04 : 데이터모델-namedtuple
  - 05 : 데이터모델-magic method in class
  - 06 : advanced list-시퀀스/list comprehension/generator(like tuple comp) 
- - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/
+     - container(서로다른 자료형담기) : `list` `tuple` collections.deque
+     - flat(1개 자료형만 담기) : str bytes bytearray `array.array` memoryview
+     - mutable(원소들 재할당 가능) : `list`, bytearray, array.array, memoryview, deque
+     - immutable(추가는되나 원소재할당시 에러) : `tuple` str bytes
+
+ - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/ list의 재할당 주의/ sort vs sorted
  
-s
+
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
 

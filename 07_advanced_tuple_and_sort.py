@@ -36,5 +36,42 @@ def test(*args, **kargs):
 
 
 # 3) 가변 vs 불변형
-l = (10, 15, 20)
-m = [10, 15, 20]
+# list나 tuple이나 서로 다른 자료형을 담을 수 있는 컨테이너라는 것은 동일하지만
+# - 가변 대표 : list, 불변 대표: tuple
+l = [10, 15, 20]
+t = (10, 15, 20)
+
+# - AAA 원소의 재할당으로 가변/불변을 판단한다.
+# l[0]=1
+# t[0]=1 # TypeError: 'tuple' object does not support item assignment
+
+
+print('EX6-1 - ', l, t, id(l), id(t))  
+# - AAA 각 list나 tuple에 2를 곱해보자. -> 곱하기 -> list안에서 요소들이 콤마로 여러개가 복제됨.
+# print(l*2, t*2) # (10, 15, 20, 10, 15, 20) [10, 15, 20, 10, 15, 20]
+# - AAA 같은 값을 다시 할당해도, id는 변하지 않는다.
+l = l
+t = t
+print('EX6-2 - ', id(l), id(t)) 
+
+# 4) list 재할당시 주의 
+# 4-1) 일반 재할당 : 새로운id의 객체가 됨.
+# - AAA **새로운 값을 변수에 할당하면 무조건 id는 달라진다.!!**
+# - AAA 곱한 것을 다시 해당 변수에 대입해서 id를 보면, 둘다 똑같이 id가 변한다.
+l = l*2
+t = t*2
+print('EX6-3 - ', id(l), id(t)) 
+
+# 4-2) 연산자재할당 : shallow copy로 객체id는 동일한놈이 값만 바뀐다.
+# - list만 연산자재할당을 이용시, 같은 객체를 재활용해서 바뀐다.
+# - AAA 객체가 deepcopy되지 않도록(메모리 사용량..) 주의할 때는 연산자재할당..
+l *= 2
+t *= 2
+print('EX6-3 - ', id(l), id(t)) 
+
+
+
+
+# 5) sort vs sorted 정렬 메소드 2개 4개의 인자.
+# - reverse, key=len, key=str.lower, key=func 의 인자를 받음.
+
