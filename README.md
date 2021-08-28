@@ -15,6 +15,7 @@
      - immutable(추가는되나 원소재할당시 에러) : `tuple` str bytes
 
  - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/ list의 재할당 주의/ sort vs sorted
+     - sorted(), sort() 주요인자 : reverse, key=len, key=str.lower, key=func(lambda)
  
 
 ## 환경설정
