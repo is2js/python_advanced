@@ -70,8 +70,40 @@ t *= 2
 print('EX6-3 - ', id(l), id(t)) 
 
 
+# cf) DataFrame.copy()는 deepcopy()로 같은값을 할당해도 보존된다.
+# - 원본df을 보존하면서 & 같은 값을 복제(할당)할 때 쓴다.
+
 
 
 # 5) sort vs sorted 정렬 메소드 2개 4개의 인자.
 # - reverse, key=len, key=str.lower, key=func 의 인자를 받음.
 
+f_list = ['orange', 'apple', 'mango', 'papaya', 'lemon', 'strawberry', 'coconut']
+# 5-1) sorted는 원본은 변경안되고, 새로운정렬된 객체를 반환만 함.
+# - AAA 정렬된 새로운객체로 copy해서 사용하고싶을 땐 sorted
+# - AAA 원본이 귀중한 정보이면, sorted로 새로 받아서 사용하자.
+test = sorted(f_list) # 문자열도 기본적으로 abc순으로 정렬됨.
+# print(test)
+# print(f_list) # 원본은 그대로 있음.
+print('EX7-1 - ', sorted(f_list))
+print('EX7-2 - ', sorted(f_list, reverse=True))
+print('EX7-3 - ', sorted(f_list, key=len)) # 내장함수 len을 넣어주면, 길이 순으로 오름차순으로 정렬해준다.
+print('EX7-4 - ', sorted(f_list, key=lambda x:x[-1])) # lambda는 각 원소를 받아서 정렬대상을 조작하여 정렬기준을 만든다.
+print('EX7-5 - ', sorted(f_list, key=lambda x:x[-1], reverse=True)) 
+print('EX7-6 - ', f_list) # sorted는 원본이 변경안되고 새로운 객체를 반환해줬었다.
+
+
+# 5-2) sort : 정렬후 객체 직접 변경
+# - sort 는  객체.sort()는 직접 객체 변환한다. 할당의 개념이 아니 replace=True개념으로 
+# - AAA .sort()는 할당받아도, None이 출력된다.
+a = f_list.sort()
+print(a, f_list) # 원본이 바뀌니 .sort()는 조심해서 사용한다.
+
+# AAA Python에서는 None값을 반환하는 메소드는 -> 반환값이 없다는 의미이다.
+# - AAA 이미 구현된 함수가 None을 반환? -> 아~ 객체를 직접 바꾸는 함수구나!!
+# - AAA 직접 함수를 작성해도 객체 직접변환이면 None반환하도록 작성
+print('EX7-7', f_list.sort(), f_list)
+print('EX7-8', f_list.sort(reverse=True), f_list) # sort() 찍은 문장은 다 None이다 .원본을 봐야함.
+print('EX7-9', f_list.sort(key=len), f_list) 
+print('EX7-10', f_list.sort(key=lambda x:x[-1]), f_list) 
+print('EX7-11', f_list.sort(key=lambda x:x[-1], reverse=True), f_list) 
