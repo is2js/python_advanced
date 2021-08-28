@@ -3,6 +3,7 @@
  - 주석을 따라가면서 클론코딩 해보세요.
     - 개인적으로 의문이 가거나 과거의 것은 `QQQ`, 
     - 개인적으로 새롭게 알게되거나 아차~! 싶은 내용들은 `AAA`로 표기되었s습니다.
+    ![image-20210828141410146](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210828141410146.png)
 
 ## 목차
  - 01~03 : 클래스/인스턴수 변수와 메서드
@@ -16,6 +17,10 @@
 
  - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/ list의 재할당 주의/ sort vs sorted
      - sorted(), sort() 주요인자 : reverse, key=len, key=str.lower, key=func(lambda)
+ - 08 : sequence_dict : hash/dict comp(csv실습)/setdefault/사용자정의Dict/immutableDict(MappingProxyType)
+     - dict.setdefault(있으면사용/없으면생성할 key, 없을때 초기값ex>[] ) 초기값 상태에서 할 행동(ex .append()) 
+
+ - 09 : sequence_set : frozen_set / {a} >> set([a]) by dis / set comprehension
  
 
 ## 환경설정
