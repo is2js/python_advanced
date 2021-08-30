@@ -21,7 +21,12 @@
      - dict.setdefault(있으면사용/없으면생성할 key, 없을때 초기값ex>[] ) 초기값 상태에서 할 행동(ex .append()) 
 
  - 09 : sequence_set : frozen_set / {a} >> set([a]) by dis / set comprehension
- 
+ - 10: first-class functions_higher-order function : 함수라는 객체의 dir(attributes) / 변수에 할당 / 고위함수(high-order func)에 인자에 함수를 대입, map, filter(lambda) / reduce / lambda / callable, 클래스 실습(__call__ 오버라이딩 -> 호출가능한 객체) / 다양한 매개변수 / 
+    - 런타임 초기화 = 실행시 초기화 가능
+    - 함수도 다른class들의 객체처럼, 객체라 dir()로 attribute가 존재한다.
+    - 함수를 변수 등에 할당 가능 ex> 데코레이터, 클로져
+    - 함수를 함수인수로 전달 가능 ex> sorted( , key=len) (,key=lambda x:x[-1])
+    - 함수를 함수 결과로 반환 가능 = return functions(재귀함수, 데코레이터 등)
 
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
