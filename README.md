@@ -6,7 +6,7 @@
     ![image-20210828141410146](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210828141410146.png)
 
 ## 목차
- - 01~03 : 클래스/인스턴수 변수와 메서드
+ - 01~03 : 클래스/인스턴수 변수와 메서드, class 실습(Student)
  - 04 : 데이터모델-namedtuple
  - 05 : 데이터모델-magic method in class
  - 06 : advanced list-시퀀스/list comprehension/generator(like tuple comp) 
@@ -17,17 +17,43 @@
 
  - 07 : advanced tuple-패킹, 언패킹/ 가변vs불변형/ list의 재할당 주의/ sort vs sorted
      - sorted(), sort() 주요인자 : reverse, key=len, key=str.lower, key=func(lambda)
- - 08 : sequence_dict : hash/dict comp(csv실습)/setdefault/사용자정의Dict/immutableDict(MappingProxyType)
+ - 08 : sequence_dict : hash/dict comp(csv실습)/setdefault/사용자정의Dict class 실습(UserDict)/immutableDict(MappingProxyType)
      - dict.setdefault(있으면사용/없으면생성할 key, 없을때 초기값ex>[] ) 초기값 상태에서 할 행동(ex .append()) 
 
  - 09 : sequence_set : frozen_set / {a} >> set([a]) by dis / set comprehension
- - 10: first-class functions_higher-order function : 함수라는 객체의 dir(attributes) / 변수에 할당 / 고위함수(high-order func)에 인자에 함수를 대입, map, filter(lambda) / reduce / lambda / callable, 클래스 실습(__call__ 오버라이딩 -> 호출가능한 객체) / 다양한 매개변수 / signature / partial
+ - 10: first-class functions_higher-order function : 함수라는 객체의 dir(attributes) / 변수에 할당 / 고위함수(high-order func)에 인자에 함수를 대입, map, filter(lambda) / reduce / lambda / callable, class 실습(LottoGame, __call__ 오버라이딩 -> 호출가능한 객체) / 다양한 매개변수 / signature / partial
+    - 일급함수 :  함수를 일종의 값으로, 객체로, 변수로 봄. -> 함수형 프로그래밍 가능. 아래와 같은 기능들을 가짐.
     - 런타임 초기화 = 실행시 초기화 가능
     - 함수도 다른class들의 객체처럼, 객체라 dir()로 attribute가 존재한다.
     - 함수를 변수 등에 할당 가능 ex> 데코레이터, 클로져
     - 함수를 함수인수로 전달 가능 ex> sorted( , key=len) (,key=lambda x:x[-1])
     - 함수를 함수 결과로 반환 가능 = return functions(재귀함수, 데코레이터 등)
+ 
+ - 11: first-class functions_closure  : 파이썬 변수 범위 + dis / 누적을 위한 class 실습(Averager) / closure, clsoure 영역 출력(closure.__code__.co_freevars), 잘못된 예와 nonlocal /  
+    - `LEGB` : 함수안에서 식별자 찾는 우선순위
+        * **Local** : 함수내부의 x를 먼저 찾는다.
+        * **Enclosing** : 함수를 감싸고 있는 것의 x
+        * **Global** : 함수 밖의 x와 sync를 맺어서 찾아온다.
+        * **Builit in** : 내장함수? Built in 영역까지 확인
+    - My closure: Free variable영역의 데이터 보존(like 객체 생성자 속 인스턴수변수에서 데이터 생성후 보존) + 내부함수에서 외부변수(v)받으면서 데이터 처리 가능
+    - closure의 list, tuple이 아닌 FreeVariable변수는 내부함수에서 nonlocal로 직전영역(FV영역)과 sync를 맞춰서 사용한다.
 
+ - 12: first-class functions_decorator : @perf_clock deco작성 / @decorator 미사용 == closure처럼 사용 -> @decorator사용 비교 /  
+    - 함수명 : func.__name__ / 매개변수들(튜플) : ', '.join( repr(arg) for arg in args)로 데코안에서 출력 가능.
+    - closure와 비교시, 메인함수-FreeVaraible영역의 보존데이터 물고사용 대신 메인함수-func실행부없는 함수를 받아 -> 내부함수(클로져영역)에서 외부변수(*args 등)을 받아 실행과 동시에 추가작업후 func() 결과 return -> 메인함수에서는 내부함수 실행없이 return -> 밖에서 @데코만 붙여주면 알아서 func(v)만 실행 대신 데코함수+(v) 실행부 붙혀서 실행됨.
+
+    ```python
+    def 데코_이름( func ):
+        def 내부_함수( *외부인자 ):
+            # func실행전 작업
+            result = func(*외부인자) # return해줘야할 원래함수 결과
+            # func실행후 작업
+            # 필요하다면 print로 추가작업 
+            print(f"데코실행 >>> 실행 중 함수이름: {func.__name__}({ repr(arg) for arg in 외부인자}) -> result: {result}")
+            return result
+        return 내부_함수
+
+    ```
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
 
