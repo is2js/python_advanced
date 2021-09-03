@@ -54,14 +54,24 @@
         return 내부_함수
 
     ```
- - 13: Object reference_reference : is vs __eq__ with tuple / copy vs deepcopy(class 실습(Basket))/ copy패키지(shallow, deep) / 
-    - 불변형(only tuple)으로 값 자체에 hash, id를 가지지 않는 이상 -> 같은값 할당:다른id / 같은값의 변수할당: 같은id for 효율성
+ - 13: Object reference_reference : is vs __eq__ with tuple / copy vs deepcopy(class 실습(Basket))/ copy패키지(shallow, deep) /  함수 매개변수 전달 사용법(함수 내부에서도 전역변수라도, 원본이 변한다.) / 불변형 4가지의 deepcopy불가(같은 값-> 어떻게 생성하든 같은id 바라봄.)
+    - 불변형 중 일부는(only tuple, string)으로 값 자체에 hash, id를 가지지 않는 이상 -> 같은값 할당:다른id / 같은값의 변수할당: 같은id for 효율성
     - 같은 값의 변수를 이용해서, deepcopy하고 싶다면 생성자(list(), dict())등을 활용하자. 생성자들은 iter변수를 받아도, 알아서 *언패킹 -> 패킹처리하여 값만 빼온다.
     - list안에 불변형(tuple)을 넣지말자. 데이터 변경시 새로운 객체를 생성(id달라짐)하는데 코스트가 많이 든다.
     - deepcopy의 목적 : 원본수정안되게 or 연결된 원본버리고 새로운 객체
     - deepcopy의 방법 : list()등의 원본+생성자활용 / copy패키지
     - shallow copy(얕은 복사)는 표면적인 객체id만 새로 생성하지만, 내부 속성들(.__dict__의 모든 것)들은 연결된 그대로의 id를 참조하고 있다.
+    - 함수의 매개인자로 넘어갈때는, 가변형/불변형을 생각하자.
+        - 가변형(list) : id가 그대로 넘어가서 함수내부에서 원본이 수정됨(할당 조심)
+            - 원본이 변경되도 상관없을 경우 사용.
+        - 불변형(tuple) : id, 객체가 복사되서 넘어가서 원본과 별개지만 코스트가 너무 클 수 있다.
 
+    - 불변형은 값:id=1:1이다. 어떻게 생성을 하든 tuple,str,btye,frozenset은 같은 값-> 같은 객체를 바라본다.
+        - 사본생성을 하지 않는다. 같은 값이면 다 원본이다.
+
+ - 14: Class method advancded : private __x  + @property(getter)-> @(getter).setter class 실습(VectorP) / 
+    - 객체 생성시부터 인스턴스변수들에 조건을 걸고 싶은데, 생성자에서만 걸면 나중에 직접접근으로 변경/오염된다. -> 생성자에서 걸면 안좋다.
+    - self._x 는 예의상 표시용이었다면 -> self.__x로 외부접근 막고 + @propery -> @p.setter로 -> setter에 조건에 맞는 데이터를 받고/getter로 꺼내기만 하자. 
 
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
