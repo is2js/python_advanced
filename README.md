@@ -54,6 +54,15 @@
         return 내부_함수
 
     ```
+ - 13: Object reference_reference : is vs __eq__ with tuple / copy vs deepcopy(class 실습(Basket))/ copy패키지(shallow, deep) / 
+    - 불변형(only tuple)으로 값 자체에 hash, id를 가지지 않는 이상 -> 같은값 할당:다른id / 같은값의 변수할당: 같은id for 효율성
+    - 같은 값의 변수를 이용해서, deepcopy하고 싶다면 생성자(list(), dict())등을 활용하자. 생성자들은 iter변수를 받아도, 알아서 *언패킹 -> 패킹처리하여 값만 빼온다.
+    - list안에 불변형(tuple)을 넣지말자. 데이터 변경시 새로운 객체를 생성(id달라짐)하는데 코스트가 많이 든다.
+    - deepcopy의 목적 : 원본수정안되게 or 연결된 원본버리고 새로운 객체
+    - deepcopy의 방법 : list()등의 원본+생성자활용 / copy패키지
+    - shallow copy(얕은 복사)는 표면적인 객체id만 새로 생성하지만, 내부 속성들(.__dict__의 모든 것)들은 연결된 그대로의 id를 참조하고 있다.
+
+
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
 
