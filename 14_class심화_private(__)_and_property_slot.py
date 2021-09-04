@@ -69,7 +69,6 @@ class VectorP(object):
 
 
 
-
 # 1-1) 
 v = VectorP(20, 40) #  x=20.0, y=40.0
 # print(v.__x) # AttributeError: 'VectorP' object has no attribute '__x'
@@ -116,4 +115,94 @@ print(v.x)
 # 1-9)
 # - setter에 걸어둔 조건에 걸려 원하는 error가 났다.
 # v.y = 20 # ValueError: 30 below is not possible
+
+print('Ex1-2 - ', dir(v), v.__dict__) # .__dict__ ; 자체의 namespace
+# - class의  namespace: 프로퍼티(getter)명대로 변수명이 들어가 있다. 
+# - dir하면.. __x의 private 변수명이  property명으로 들어가있다.
+#  [..., 'x', 'y']
+# 
+# - 객체의 namespace : 알아서 getter/setter의 변수를 지어놨따. : 
+#   '_VectorP__x': 10.0, '_VectorP__y': 40.0
+#   접근은 v.(def)x인데... _class명 +__프로퍼티명
+print('EX1-3 - ', v.x, v.y)
+
+# AAA private변수는 property로 안전하게 보호 + 유효성 검사까지하자.!
+
+
+
+# 2) slot
+# - python interpreter에게 통보하는 역할을 함.
+# - 해당 클래스가 가지는 속성을 제한한다.
+# - 모든 속성들을 __dict__ 형태로 관리되는데
+# - dict는 key 중복 검사 등을 위해 hash table을 이용하기 때문에, 메모리를 많이 사용한다.
+# - class 100개 -> __dict__ 100개 생성-> 다 메모리에? 
+# -> 최적화가 필요한 자료구조 -> slot을 사용해서 dict속성을 최적화한다.
+# -> 엄밀히 말하면, dict를 set으로 바꿔서 사용한다고 함.
+# AAA dict속성최적화로 다수 객체 생성시 메모리 사용공간 대폭 감소 ! (최대 20%까지)
+# AAA 해당 class에 만들어진 인스턴스 속성(__dict__)관리에 dictionary대신 set형태를 사용한다. 지정된 속성만 사용할 수 있음. 메모리 감소 시킴
+
+# 2-1) 딱 사용할 속성을 튜플형태로 지정해줌 -> 밑에서는 그것만 사용
+class TestA(object):
+    __slots__ = ('a', )
+
+# 2-2) slots을 사용하지 않으면, attr들을 dict로 관리하게 된다.
+class TestB(object):
+    pass 
+
+use_slot = TestA()
+no_slot = TestB()
+
+print('EX2-1 - ', use_slot) # <__main__.TestA object at 0x03530870>
+# - slots를 사용하면 __dict__는 존재하지 않는다. set이 사용됨.
+# print('EX2-2 - ', use_slot.__dict__) # AttributeError: 'TestA' object has no attribute '__dict__'
+print('EX2-3 - ', no_slot.__dict__) # {}
+
+# AAA ML처럼 class자체가 많아지는 경우 -> slots을 사용하고 있다.
+# - 좋은 패키지는 다 90%이상 slot을.. 사용함
+# - 혼자쓸 프로그램은 그냥 slot없이 사용
+
+
+
+# 2-3) 메모리 사용량 비교 ( timeit + closure )
+# - 20% 성능은.. 엄청난 차이다.
+# - timeit 모듈 + closure로 만든다.
+
+from time import time
+import timeit
+# 외부함수 인자 -> func면 @deco / 그외 or 아무것도 없으면 closure
+def repeat_outer(obj):
+    # 내부함수 인자X -> 외부에서 호출()시 안받는다는 말
+    def repeat_inner():
+        # 내부함수 내용 : 외부인자들(외부함수or객체, 내부변수)처리 (및 외부함수 실제 결과 return)
+        # - 문자열을 넣었다가 지움.
+        obj.a = "TEST"
+        del obj.a 
+    return repeat_inner
+
+# timeit.repeat() 함수+횟수를 넘겨주면, 그 횟수만큼 실행시켜서 시간 반환
+# - slot사용 class의 객체 vs noslot class 객체의
+# - 데이터입력 후 삭제되는 시간을 비교
+# print(timeit.repeat(repeat_outer( use_slot ),number=1000))
+# [0.0007304999999995232, 0.0007033999999999097, 0.0007327000000003636, 0.0006251999999999924, 0.00053760000000036]
+# - 1/1000초도 안걸린다.
+# - 여러 시간 중 제일 적게 걸린시간만 뽑아내자.
+print(min(timeit.repeat(repeat_outer( use_slot ),number=10000))) 
+# slot    만번 : 0.002679100000023027
+print(min(timeit.repeat(repeat_outer( no_slot ),number=10000))) 
+# no slot 만번 : 0.0035783999999239313
+# -> 시간 많이 걸린다 = 내부프로세스 복잡 + 메모리도 많이 쓴다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

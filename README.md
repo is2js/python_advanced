@@ -1,9 +1,7 @@
 ## 개요
- - python의 심화된 내용을 py파일에 주석으로 차근차근 작성되었습니다.
+ - python의 심화된 내용을 py파일에 주석으로 번호를 매기며 실습합니다.
  - 주석을 따라가면서 클론코딩 해보세요.
-    - 개인적으로 의문이 가거나 과거의 것은 `QQQ`, 
-    - 개인적으로 새롭게 알게되거나 아차~! 싶은 내용들은 `AAA`로 표기되었s습니다.
-    ![image-20210828141410146](https://raw.githubusercontent.com/is3js/screenshots/main/image-20210828141410146.png)
+    - 개인적인 의문 or action 전의 행동 `QQQ`, 새롭게 알게 되거나  아차~! 싶은 내용들은 `AAA`로 표기되었습니다.
 
 ## 목차
  - 01~03 : 클래스/인스턴수 변수와 메서드, class 실습(Student)
@@ -38,7 +36,7 @@
     - My closure: Free variable영역의 데이터 보존(like 객체 생성자 속 인스턴수변수에서 데이터 생성후 보존) + 내부함수에서 외부변수(v)받으면서 데이터 처리 가능
     - closure의 list, tuple이 아닌 FreeVariable변수는 내부함수에서 nonlocal로 직전영역(FV영역)과 sync를 맞춰서 사용한다.
 
- - 12: first-class functions_decorator : @perf_clock deco작성 / @decorator 미사용 == closure처럼 사용 -> @decorator사용 비교 /  
+ - 12: first-class functions_decorator : @perf_clock deco실습 / @decorator 미사용 == closure처럼 사용 -> @decorator사용 비교 /  
     - 함수명 : func.__name__ / 매개변수들(튜플) : ', '.join( repr(arg) for arg in args)로 데코안에서 출력 가능.
     - closure와 비교시, 메인함수-FreeVaraible영역의 보존데이터 물고사용 대신 메인함수-func실행부없는 함수를 받아 -> 내부함수(클로져영역)에서 외부변수(*args 등)을 받아 실행과 동시에 추가작업후 func() 결과 return -> 메인함수에서는 내부함수 실행없이 return -> 밖에서 @데코만 붙여주면 알아서 func(v)만 실행 대신 데코함수+(v) 실행부 붙혀서 실행됨.
 
@@ -69,9 +67,12 @@
     - 불변형은 값:id=1:1이다. 어떻게 생성을 하든 tuple,str,btye,frozenset은 같은 값-> 같은 객체를 바라본다.
         - 사본생성을 하지 않는다. 같은 값이면 다 원본이다.
 
- - 14: Class method advancded : private __x  + @property(getter)-> @(getter).setter class 실습(VectorP) / 
+ - 14: Class method advancded : private __x  + @property(getter)-> @(getter).setter class 실습(VectorP) / slot - 명령어, 반복시 걸린시간 (by timeit) 비교- class 실습(TestA, TestB) , repeat_outer + timeit deco실습 / 
     - 객체 생성시부터 인스턴스변수들에 조건을 걸고 싶은데, 생성자에서만 걸면 나중에 직접접근으로 변경/오염된다. -> 생성자에서 걸면 안좋다.
     - self._x 는 예의상 표시용이었다면 -> self.__x로 외부접근 막고 + @propery -> @p.setter로 -> setter에 조건에 맞는 데이터를 받고/getter로 꺼내기만 하자. 
+
+ - 15: Class method advanced : __len__ __getitem__ for slicing  class 실습(Objects) / 추상클래스, abc 설명 / sequence관련 메소드를 가진 추상클래스 / 
+    - 추상클래스는 수백가지 자식class들이 공통으로 정의한 변수,메서드들의 naming을 사용해서 정의되게 함. 
 
 ## 환경설정
  - 찾기 쉬운 경로인 `C:\`안에 `python_advanced`로 폴더를 만든다.
